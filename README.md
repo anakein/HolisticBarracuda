@@ -1,3 +1,22 @@
+Add webcam use.
+
+Webcaminput.cs for webcam use
+Webcaminput_ori.cs, original file with video file support.
+
+you need change into visualizer.cs file line 10 for return video mode.
+    [SerializeField] WebcamInput webCamInput; to     [SerializeField] WebcamInput webCamInput_ori;
+    
+
+changes in files:
+webcaminput
+visualizer
+holisticpipeline
+holisticinterfacetype
+
+now there are 2 new options:
+hand and face
+only hand
+
 # HolisticBarracuda
 `full`
 
