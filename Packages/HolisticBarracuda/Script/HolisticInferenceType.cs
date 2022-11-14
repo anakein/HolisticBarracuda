@@ -4,6 +4,8 @@ namespace MediaPipe.Holistic {
         pose_and_face,
         pose_and_hand,
         pose_only,
-        face_only
+        face_only,
+        hand_only,
+        hand_and_face
     }
 }

@@ -200,7 +200,10 @@ public class HolisticPipeline : System.IDisposable
             float poseDetectionIouThreshold = 0.3f)
     {
         // Inference pose landmark with BlazePoseBarracuda.
-        if(inferenceType != HolisticInferenceType.face_only)
+        if( inferenceType != HolisticInferenceType.face_only ||
+            inferenceType != HolisticInferenceType.hand_only ||
+            inferenceType != HolisticInferenceType.hand_and_face
+        )
             blazePoseDetecter.ProcessImage(inputTexture, blazePoseModel, poseDetectionThreshold, poseDetectionIouThreshold);
 
         if(inferenceType == HolisticInferenceType.pose_only) return;
@@ -224,13 +227,16 @@ public class HolisticPipeline : System.IDisposable
         // Inference face and eye landmark.
         if( inferenceType == HolisticInferenceType.full || 
             inferenceType == HolisticInferenceType.pose_and_face || 
-            inferenceType == HolisticInferenceType.face_only
+            inferenceType == HolisticInferenceType.face_only ||
+            inferenceType == HolisticInferenceType.hand_and_face
         )
             FaceProcess(letterBoxTexture, scale);
 
         // Inference hands landmark.
         if( inferenceType == HolisticInferenceType.full || 
-            inferenceType == HolisticInferenceType.pose_and_hand
+            inferenceType == HolisticInferenceType.pose_and_hand ||
+            inferenceType == HolisticInferenceType.hand_only ||
+            inferenceType == HolisticInferenceType.hand_and_face
         )
             HandProcess(inputTexture, letterBoxTexture, scale);
     }
