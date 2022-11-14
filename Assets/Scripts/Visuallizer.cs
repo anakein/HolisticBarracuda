@@ -7,7 +7,7 @@ using MediaPipe.Holistic;
 public class Visuallizer : MonoBehaviour
 {
     [SerializeField] Camera cam;
-    [SerializeField] WebCamInput webCamInput;
+    [SerializeField] WebcamInput webCamInput;
     [SerializeField] RawImage image;
     [SerializeField] Shader poseShader;
     [SerializeField, Range(0, 1)] float humanExistThreshold = 0.5f;
@@ -55,22 +55,35 @@ public class Visuallizer : MonoBehaviour
     }
 
     void OnRenderObject(){
-        if(holisticInferenceType != HolisticInferenceType.face_only) PoseRender();
+        //Debug.log(e HolisticInferenceType)
+        if( holisticInferenceType == HolisticInferenceType.full ||
+            holisticInferenceType == HolisticInferenceType.pose_only ||
+            holisticInferenceType == HolisticInferenceType.pose_and_face ||
+            holisticInferenceType == HolisticInferenceType.pose_and_hand
+        ) PoseRender();
+
+        
         if(holisticInferenceType == HolisticInferenceType.pose_only) return;
 
         if( holisticInferenceType == HolisticInferenceType.full || 
             holisticInferenceType == HolisticInferenceType.pose_and_face || 
-            holisticInferenceType == HolisticInferenceType.face_only)
+            holisticInferenceType == HolisticInferenceType.face_only ||
+            holisticInferenceType == HolisticInferenceType.hand_and_face
+        )
         {
             FaceRender();
         }
 
         if( holisticInferenceType == HolisticInferenceType.full || 
-            holisticInferenceType == HolisticInferenceType.pose_and_hand)
+            holisticInferenceType == HolisticInferenceType.pose_and_hand ||
+            holisticInferenceType == HolisticInferenceType.hand_only ||
+            holisticInferenceType == HolisticInferenceType.hand_and_face
+        )
         {
             HandRender(false);
             HandRender(true);
         }
+
     }
 
     void PoseRender(){
