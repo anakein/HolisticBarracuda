@@ -14,8 +14,8 @@ holisticpipeline
 holisticinterfacetype
 
 now there are 2 new options:
-hand and face
-only hand
+hand_and_face,
+only_hand
 
 # HolisticBarracuda
 `full`
